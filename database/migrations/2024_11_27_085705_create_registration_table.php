@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('registration', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('student_id')->constrained()->onDelete('cascade');
+            $table->date('registration_date');
+            $table->string('status');
             $table->timestamps();
         });
     }
