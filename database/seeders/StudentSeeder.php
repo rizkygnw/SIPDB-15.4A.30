@@ -23,7 +23,7 @@ class StudentSeeder extends Seeder
         ]);
 
         Student::create([
-            'user_id' => 3, // ID dari user John Doe
+            'user_id' => 3,
             'name' => 'Rizky',
             'address' => 'Merdeka',
             'birth_date' => '2004-01-01',
@@ -32,7 +32,7 @@ class StudentSeeder extends Seeder
         ]);
 
         Student::create([
-            'user_id' => 4, // ID dari user John Doe
+            'user_id' => 4,
             'name' => 'Joan',
             'address' => 'Tanjung Hulu',
             'birth_date' => '2004-09-25',
@@ -41,7 +41,7 @@ class StudentSeeder extends Seeder
         ]);
 
         Student::create([
-            'user_id' => 5, // ID dari user John Doe
+            'user_id' => 5,
             'name' => 'Roy',
             'address' => 'Tanjung Hulu',
             'birth_date' => '2003-01-12',
@@ -50,7 +50,7 @@ class StudentSeeder extends Seeder
         ]);
 
         Student::create([
-            'user_id' => 6, // ID dari user John Doe
+            'user_id' => 6,
             'name' => 'Jane Doe',
             'address' => '321 Main Street',
             'birth_date' => '2005-08-20',
