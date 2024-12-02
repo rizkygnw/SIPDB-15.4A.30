@@ -19,35 +19,35 @@ class PaymentSeeder extends Seeder
             'student_id' => 1,
             'payment_date' => now(),
             'amount' => 500.00,
-            'receipt_number' => 'REC123456',
+            'receipt_number' => 'REC654321',
         ]);
 
         Payment::create([
             'student_id' => 2,
             'payment_date' => now(),
             'amount' => 500.00,
-            'receipt_number' => 'REC123456',
+            'receipt_number' => 'REC896142',
         ]);
 
         Payment::create([
             'student_id' => 3,
             'payment_date' => now(),
             'amount' => 500.00,
-            'receipt_number' => 'REC123456',
+            'receipt_number' => 'REC095721',
         ]);
 
         Payment::create([
             'student_id' => 4,
             'payment_date' => now(),
             'amount' => 500.00,
-            'receipt_number' => 'REC123456',
+            'receipt_number' => 'REC584329',
         ]);
 
         Payment::create([
             'student_id' => 5,
             'payment_date' => now(),
             'amount' => 500.00,
-            'receipt_number' => 'REC123456',
+            'receipt_number' => 'REC918273',
         ]);
     }
 }

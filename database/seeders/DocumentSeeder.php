@@ -27,19 +27,19 @@ class DocumentSeeder extends Seeder
 
         Document::create([
             'student_id' => 3,
-            'document_type' => 'ID Card',
+            'document_type' => 'KK',
             'file_path' => 'documents/id_card3.pdf',
         ]);
 
         Document::create([
             'student_id' => 4,
-            'document_type' => 'ID Card',
+            'document_type' => 'KTP',
             'file_path' => 'documents/id_card4.pdf',
         ]);
 
         Document::create([
             'student_id' => 5,
-            'document_type' => 'ID Card',
+            'document_type' => 'KTP',
             'file_path' => 'documents/id_card5.pdf',
         ]);
     }
