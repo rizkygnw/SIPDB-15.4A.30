@@ -24,23 +24,31 @@ class StudentRequest extends FormRequest
         return [
             'user_id' => 'required|exists:user_data,id',
             'name' => 'required|string|max:255',
-            'address' => 'required|string|max:500',
+            'address' => 'required|string',
             'birth_date' => 'required|date',
-            'school_origin' => 'nullable|string|max:255',
-            'status' => 'required',
+            'school_origin' => 'required|string|max:255',
+            'status' => 'required|string|max:50',
         ];
     }
 
-    public function messages(): array
+    public function messages()
     {
         return [
-            'user_id.required' => 'User ID is required.',
-            'name.required' => 'Name is required.',
-            'address.required' => 'Address is required.',
-            'birth_date.required' => 'Birth date is required.',
-            'birth_date.date' => 'Birth date must be a valid date.',
-            'status.required' => 'Status is required.',
-            'status.in' => 'Status must be either active or inactive.',
+            'user_id.required' => 'User ID harus diisi.',
+            'user_id.exists' => 'User ID tidak valid.',
+            'name.required' => 'Nama harus diisi.',
+            'name.string' => 'Nama harus berupa teks.',
+            'name.max' => 'Nama tidak boleh lebih dari 255 karakter.',
+            'address.required' => 'Alamat harus diisi.',
+            'address.string' => 'Alamat harus berupa teks.',
+            'birth_date.required' => 'Tanggal lahir harus diisi.',
+            'birth_date.date' => 'Tanggal lahir harus berupa tanggal yang valid.',
+            'school_origin.required' => 'Asal sekolah harus diisi.',
+            'school_origin.string' => 'Asal sekolah harus berupa teks.',
+            'school_origin.max' => 'Asal sekolah tidak boleh lebih dari 255 karakter.',
+            'status.required' => 'Status harus diisi.',
+            'status.string' => 'Status harus berupa teks.',
+            'status.max' => 'Status tidak boleh lebih dari 50 karakter.',
         ];
     }
 }
