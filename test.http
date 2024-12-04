@@ -1,16 +1,16 @@
-### get token
-GET http://localhost:8000
+# ### get token
+# GET http://localhost:8000
 
-### test create student
-POST http://localhost:8000/student
-Content-Type: application/json
+# ### test create student
+# POST http://localhost:8000/student
+# Content-Type: application/json
 
-{
-    "user_id" : 5,
-    "name" : "Roy",
-    "address" : "Tanjung Hulu",
-    "birth_date" : "2003-01-12",
-    "school_origin" :"High School A",
-    "status" : "active",
-    "_token": "QA1WSAFdwWeXXRYNovfoob00aNq6hdRJ5Pae2qnS"
-}
+# {
+#     "user_id" : 5,
+#     "name" : "Roy",
+#     "address" : "Tanjung Hulu",
+#     "birth_date" : "2003-01-12",
+#     "school_origin" :"High School A",
+#     "status" : "active",
+#     "_token": "QA1WSAFdwWeXXRYNovfoob00aNq6hdRJ5Pae2qnS"
+# }
