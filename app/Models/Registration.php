@@ -14,4 +14,9 @@ class Registration extends Model
         'registration_date',
         'status',
     ];
+
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
 }

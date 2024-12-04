@@ -15,4 +15,9 @@ class Payment extends Model
         'amount',
         'receipt_number',
     ];
+    
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
 }

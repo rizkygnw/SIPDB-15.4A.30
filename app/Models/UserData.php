@@ -17,4 +17,8 @@ class UserData extends Model
         'password',
         'role',
     ];
+
+    protected $hidden = [
+        'password',
+    ];
 }

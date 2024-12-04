@@ -41,5 +41,3 @@ class UserDataRequest extends FormRequest
             'role.in' => 'Role Harus Salah Satu dari admin atau student',
         ];
     }
-
-}

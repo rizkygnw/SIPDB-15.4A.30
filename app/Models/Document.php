@@ -14,4 +14,9 @@ class Document extends Model
         'document_type',
         'file_path',
     ];
+
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
 }
