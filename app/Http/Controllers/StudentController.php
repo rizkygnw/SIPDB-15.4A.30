@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StudentRequest;
 use App\Models\Student;
-use Illuminate\Http\Request;
+use App\Models\User;
 
 class StudentController extends Controller
 {
@@ -12,8 +12,6 @@ class StudentController extends Controller
     {
         $validated = $request->validated();
 
-        $example = Student::query()->create($validated);
-
-        return response()->json($example, 201);
+        return response()->json(['message' => 'Validation successful.', 'data' => $validated], 200);
     }
 }

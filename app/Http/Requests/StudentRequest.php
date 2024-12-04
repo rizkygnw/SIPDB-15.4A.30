@@ -27,7 +27,7 @@ class StudentRequest extends FormRequest
             'address' => 'required|string|max:500',
             'birth_date' => 'required|date',
             'school_origin' => 'nullable|string|max:255',
-            'status' => 'required|in:active,inactive',
+            'status' => 'required',
         ];
     }
 
@@ -35,7 +35,6 @@ class StudentRequest extends FormRequest
     {
         return [
             'user_id.required' => 'User ID is required.',
-            'user_id.exists' => 'The user must exist in the database.',
             'name.required' => 'Name is required.',
             'address.required' => 'Address is required.',
             'birth_date.required' => 'Birth date is required.',

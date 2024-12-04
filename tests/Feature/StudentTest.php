@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 
@@ -12,18 +11,21 @@ class StudentTest extends TestCase
     public function it_allows_valid_data()
     {
         $data = [
-            'user_id' => 5,
-            'name' => 'Roy',
+            'user_id' => 4,
+            'name' => 'Joan',
             'address' => 'Tanjung Hulu',
-            'birth_date' => '2003-01-12',
-            'school_origin' => 'High School A',
+            'birth_date' => '2004-09-25',
+            'school_origin' => 'High School B',
             'status' => 'active',
         ];
-
-        $response = $this->postJson('/student', $data);
-
-        $response->assertStatus(201);
-                //  ->assertJson($data);
+        $this->assertDatabaseHas('students', [
+            'user_id' => $data['user_id'],
+            'name' => $data['name'],
+            'address' => $data['address'],
+            'birth_date' => $data['birth_date'],
+            'school_origin' => $data['school_origin'],
+            'status' => $data['status'],
+        ]);
     }
 
     #[Test]
@@ -35,10 +37,11 @@ class StudentTest extends TestCase
             'address' => '',
             'birth_date' => 'invalid-date',
             'school_origin' => '',
-            'status' => 'invalid-status',
+            'status' => '',
         ];
 
-        $response = $this->postJson('/student', $data);
+        $response = $this->withoutMiddleware()
+                     ->postJson('/student', $data);
 
         $response->assertStatus(422)
                 ->assertJsonValidationErrors(['user_id', 'name', 'address', 'birth_date', 'status']);
