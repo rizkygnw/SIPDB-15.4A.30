@@ -11,7 +11,7 @@ class DocumentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,22 @@ class DocumentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'student_id' => 'required|exists:students,id',
+            'document_type' => 'required|string|max:255',
+            'file_path' => 'required|string|max:255',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'student_id.required' => 'ID siswa harus diisi.',
+            'student_id.exists' => 'ID siswa tidak valid.',
+            'document_type.required' => 'Tipe dokumen harus diisi.',
+            'document_type.string' => 'Tipe dokumen harus berupa teks.',
+            'document_type.max' => 'Tipe dokumen tidak boleh lebih dari 255 karakter.',
+            'file_path.required' => 'Path file harus diisi.',
+            'file_path.string' => 'Path file harus berupa teks.',
+            'file_path.max' => 'Path file tidak boleh lebih dari 255 karakter.',
         ];
     }
 }

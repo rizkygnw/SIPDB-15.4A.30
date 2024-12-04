@@ -11,7 +11,7 @@ class RegistrationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,21 @@ class RegistrationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'student_id' => 'required|exists:students,id',
+            'registration_date' => 'required|date',
+            'status' => 'required|string|max:50',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'student_id.required' => 'ID siswa harus diisi.',
+            'student_id.exists' => 'ID siswa tidak valid.',
+            'registration_date.required' => 'Tanggal pendaftaran harus diisi.',
+            'registration_date.date' => 'Tanggal pendaftaran harus berupa tanggal yang valid.',
+            'status.required' => 'Status harus diisi.',
+            'status.string' => 'Status harus berupa teks.',
+            'status.max' => 'Status tidak boleh lebih dari 50 karakter.',
         ];
     }
 }

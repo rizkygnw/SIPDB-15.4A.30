@@ -11,7 +11,7 @@ class LogRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,17 @@ class LogRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'user_id' => 'required|exists:user_data,id',
+            'activity' => 'required|string',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'user_id.required' => 'User ID harus diisi.',
+            'user_id.exists' => 'User ID tidak valid.',
+            'activity.required' => 'Aktivitas harus diisi.',
+            'activity.string' => 'Aktivitas harus berupa teks.',
         ];
     }
 }
