@@ -22,7 +22,6 @@ class StudentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|exists:user_data,id',
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:500',
             'birth_date' => 'required|date',
@@ -34,13 +33,12 @@ class StudentRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'user_id.required' => 'User ID is required.',
-            'name.required' => 'Name is required.',
-            'address.required' => 'Address is required.',
-            'birth_date.required' => 'Birth date is required.',
-            'birth_date.date' => 'Birth date must be a valid date.',
-            'status.required' => 'Status is required.',
-            'status.in' => 'Status must be either active or inactive.',
+            'user_id.required' => 'Masukkan ID Pengguna',
+            'name.required' => 'Masukkan Nama Pengguna',
+            'address.required' => 'Masukkan Alamat',
+            'birth_date.required' => 'Masukkan Tanggal Lahir',
+            'birth_date.date' => 'Tanggal Lahir Harus Valid!',
+            'status.required' => 'Masukkan Status',
         ];
     }
 }

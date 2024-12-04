@@ -17,4 +17,9 @@ class Student extends Model
         'school_origin',
         'status',
     ];
+
+    public function userData()
+    {
+        return $this->belongsTo(UserData::class, 'user_id');
+    }
 }

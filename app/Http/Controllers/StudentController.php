@@ -4,14 +4,65 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StudentRequest;
 use App\Models\Student;
-use App\Models\User;
+use App\Models\UserData;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
+    public function index()
+    {
+        $students = Student::all();
+        return view('student.index', compact('students'));
+    }
+
+    public function create()
+    {
+        return view('student.create');
+    }
+
     public function store(StudentRequest $request)
     {
-        $validated = $request->validated();
+        $lastUser = UserData::orderBy('id', 'desc')->first();
 
-        return response()->json(['message' => 'Validation successful.', 'data' => $validated], 200);
+        $userId = $lastUser ? $lastUser->id : 1;
+
+        Student::create([
+            'user_id' => $userId,
+            'name' => $request->name,
+            'address' => $request->address,
+            'birth_date' => $request->birth_date,
+            'school_origin' => $request->school_origin,
+            'status' => $request->status,
+        ]);
+
+        return redirect()->route('student.index')->with('success', 'Student added successfully.');
+    }
+
+    public function edit($id)
+    {
+        $student = Student::findOrFail($id);
+
+        return view('student.edit', compact('student'));
+    }
+
+    public function update(StudentRequest $request, Student $student)
+    {
+        $student->update($request->validated());
+        return redirect()->route('student.index')->with('success', 'Student updated successfully.');
+    }
+
+    public function destroy(Student $student)
+    {
+        $deletedId = $student->id;
+        $student->delete();
+
+        Student::where('id', '>', $deletedId)
+                ->decrement('id', 1);
+
+        $lastId = Student::max('id');
+        $newAutoIncrement = $lastId + 1;
+        DB::statement("ALTER TABLE user_data AUTO_INCREMENT = $newAutoIncrement;");
+
+        return redirect()->route('student.index')->with('success', 'Student deleted and auto increment updated successfully.');
     }
 }
