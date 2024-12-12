@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('layout')
 
 @section('content')
 <div class="container">
     <h1>Add User</h1>
-    <form action="{{ route('userdata.store') }}" method="POST">
+    <form action="{{ route('userdata.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label>Name</label>
@@ -38,6 +38,11 @@
             @error('role')
                 <div class="text-danger">{{ $message }}</div>
             @enderror
+        </div>
+
+        <div class="mb-3">
+            <label for="photo" class="form-label">Photo</label>
+            <input class="form-control" type="file" id="photo" name="photo" accept="image/*" required>
         </div>
 
         <button type="submit" class="btn btn-primary">Save</button>
