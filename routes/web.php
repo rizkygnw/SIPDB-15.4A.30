@@ -13,6 +13,7 @@ use App\Http\Controllers\UserDataController;
 Route::resource('userdata', UserDataController::class)->parameters([
     'userdata' => 'userData',
 ]);
+Route::get('/',function(){ return view('layout');});
 Route::resource('student', StudentController::class);
 Route::resource('registrations', RegistrationController::class);
 Route::resource('payments', PaymentController::class);
