@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Departments</title>
-</head>
-<body>
-    <h1>Departments</h1>
-    <a href="{{ route('departments.create') }}">Create Department</a>
+@extends('layout')
 
-    <table>
+@section('content')
+    <div class="container">
+        <h1>Departments</h1>
+    <a href="{{ route('departments.create') }}" class="btn btn-primary">Upload New Document</a>
+
+    <table class="table mt-4">
         <thead>
             <tr>
                 <th>Name</th>
@@ -21,16 +17,16 @@
             <tr>
                 <td>{{ $department->name }}</td>
                 <td>
-                    <a href="{{ route('departments.edit', $department->id) }}">Edit</a>
+                    <a href="{{ route('departments.edit', $department->id) }}" class="btn btn-primary">Edit</a>
                     <form action="{{ route('departments.destroy', $department->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit">Delete</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
-</body>
-</html>
+    </div>
+@endsection
