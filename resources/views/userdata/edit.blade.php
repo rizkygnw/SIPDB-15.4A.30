@@ -38,12 +38,6 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="photo" class="form-label">Photo</label>
-                    @if ($userData->photo)
-                        <div class="mb-2">
-                            <img src="{{ asset('storage/' . $userData->photo) }}" alt="Photo of {{ $userData->name }}" class="img-thumbnail" width="150">
-                        </div>
-                    @endif
                     <input class="form-control" type="file" id="photo" name="photo" accept="image/*">
                     <small class="text-muted">Leave blank to keep the current photo</small>
                 </div>

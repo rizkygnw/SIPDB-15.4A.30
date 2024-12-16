@@ -9,7 +9,7 @@ use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserDataController;
 
-
+Route::get('/userdata/foto/{id}', [UserDataController::class, 'foto'])->name('userdata.foto');
 Route::resource('userdata', UserDataController::class)->parameters([
     'userdata' => 'userData',
 ]);

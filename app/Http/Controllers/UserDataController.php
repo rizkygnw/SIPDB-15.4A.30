@@ -25,11 +25,11 @@ class UserDataController extends Controller
     {
         $data = $request->validated();
         if ($request->hasFile('photo')) {
-            $fileName = time() . '.' . $request->photo->getClientOriginalExtension();
-            $filePath = $request->photo->storeAs('uploads/photos', $fileName, 'public');
-            $data['photo'] = $filePath; // Simpan path file ke dalam data
+            $fileName = time() . '_' . uniqid() . '.' . $request->photo->getClientOriginalExtension();
+            $filePath = $request->photo->storeAs('uploads/photos', $fileName, 'private');
+            $data['photo'] = $filePath;
         } else {
-            $data['photo'] = null; // Atur null jika tidak ada foto
+            $data['photo'] = null;
         }
 
         UserData::create([
@@ -54,15 +54,18 @@ class UserDataController extends Controller
         if ($request->hasFile('photo')) {
             // Hapus foto lama jika ada
             if ($userData->photo) {
-                Storage::disk('public')->delete($userData->photo);
+                Storage::disk('private')->delete($userData->photo);
             }
 
             // Simpan foto baru
             $fileName = time() . '.' . $request->photo->getClientOriginalExtension();
-            $filePath = $request->photo->storeAs('uploads/photos', $fileName, 'public');
+            // Storage::put("photos", $fileName);
+            // biasakan menggunakan kode diatas untuk mengembangkan aplikasi stateless, jangan seperti dibawah
+
+            $filePath = $request->photo->storeAs('uploads/photos', $fileName, 'private');
             $data['photo'] = $filePath; // Simpan path foto baru
         } else {
-            $data['photo'] = $userData->photo; // Pertahankan foto lama jika tidak ada yang diunggah
+            $data['photo'] = $userData->photo;
         }
 
         $userData->update([
@@ -82,6 +85,10 @@ class UserDataController extends Controller
 
         $userData->delete();
 
+        if ($userData->photo) {
+            Storage::disk('private')->delete($userData->photo);
+        }
+
         UserData::where('id', '>', $deletedId)
                 ->decrement('id', 1);
 
@@ -98,8 +105,8 @@ class UserDataController extends Controller
         $user = UserData::findOrFail($id);
 
         // Jika foto ada, tampilkan
-        if ($user->photo) {
-            return response()->file(storage_path('app/public/' . $user->photo));
+        if ($user->photo && Storage::disk('private')->exists($user->photo)) {
+            return response()->file(storage_path('app/private/' . $user->photo));
         }
 
         // Jika tidak ada foto, tampilkan default

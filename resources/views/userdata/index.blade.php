@@ -19,11 +19,10 @@
             <tr>
                 <td>
                     <img
-                        src="{{ $user->photo ? asset('storage/' . $user->photo) : asset('default-photo.png') }}"
-                        alt="Photo of {{ $user->name }}"
-                        width="60"
-                        height="60"
-                        style="object-fit: cover; border-radius: 50%;"
+                        src="{{ $user->photo ? url('userdata/foto/'.$user->id) . '?' . time() : asset('default-photo.png') }}"
+                        alt="{{ $user->name }}"
+                        class="rounded-circle"
+                        style="object-fit: cover; width: 60px; height: 60px;"
                     >
                 </td>
                 <td>{{ $user->name }}</td>
