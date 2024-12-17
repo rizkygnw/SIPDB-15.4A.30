@@ -51,6 +51,7 @@ class UserDataController extends Controller
     public function update(UserDataRequest $request, UserData $userData)
     {
         $data = $request->validated();
+
         if ($request->hasFile('photo')) {
             // Hapus foto lama jika ada
             if ($userData->photo) {
