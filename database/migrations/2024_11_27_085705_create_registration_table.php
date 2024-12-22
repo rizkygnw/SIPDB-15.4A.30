@@ -13,10 +13,14 @@ return new class extends Migration
     {
         Schema::create('registrations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')->constrained()->onDelete('cascade');
+            $table->integer('student_id'); //....
+            $table->foreignId('student_id')->constrained()->onDelete('cascade'); // tidak perlu digunakan
             $table->date('registration_date');
             $table->string('status');
             $table->timestamps();
+
+            // untuk foreign key relasi ke id students
+            $table->foreign('student_id')->references('id')->on('students');
         });
     }
 

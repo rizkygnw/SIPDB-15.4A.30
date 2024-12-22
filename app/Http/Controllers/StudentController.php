@@ -11,6 +11,7 @@ class StudentController extends Controller
 {
     public function index()
     {
+        // return request()->user(); informasi pengguna login
         $students = Student::all();
         return view('student.index', compact('students'));
     }

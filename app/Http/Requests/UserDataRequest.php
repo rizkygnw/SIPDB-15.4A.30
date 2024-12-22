@@ -26,7 +26,7 @@ class UserDataRequest extends FormRequest
             'email' => 'required|email:user_data,email,' . $this->route('userdata'),
             'password' => 'nullable|min:8',
             'role' => 'required|string|in:admin,student',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 

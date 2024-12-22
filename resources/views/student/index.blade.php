@@ -1,46 +1,70 @@
 @extends('layout')
 
 @section('content')
-<div class="container">
-    <h1>Students List</h1>
-    <a href="{{ route('student.create') }}" class="btn btn-primary mb-3">Add New Student</a>
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <!-- Card Header -->
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h3 class="mb-0">Students List</h3>
+            <a href="{{ route('student.create') }}" class="btn btn-light btn-sm">
+                <i class="bi bi-person-plus me-1"></i> Add New Student
+            </a>
+        </div>
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Birth Date</th>
-                <th>School Origin</th>
-                <th>Status</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($students as $student)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $student->name }}</td>
-                <td>{{ $student->address }}</td>
-                <td>{{ $student->birth_date }}</td>
-                <td>{{ $student->school_origin }}</td>
-                <td>{{ $student->status }}</td>
-                <td>
-                    <a href="{{ route('student.edit', $student->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <form action="{{ route('student.destroy', $student->id) }}" method="POST" style="display:inline-block;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
-                    </form>
-                </td>
-            </tr>
-            @empty
-            <tr>
-                <td colspan="7" class="text-center">No Students Found</td>
-            </tr>
-            @endforelse
-        </tbody>
-    </table>
+        <!-- Card Body -->
+        <div class="card-body">
+            <!-- Responsive Table -->
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered text-center align-middle mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Birth Date</th>
+                            <th>School Origin</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($students as $student)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td class="fw-semibold">{{ $student->name }}</td>
+                            <td>{{ $student->address }}</td>
+                            <td>{{ $student->birth_date }}</td>
+                            <td>{{ $student->school_origin }}</td>
+                            <td>
+                                <span class="badge {{ $student->status == 'Active' ? 'bg-success' : 'bg-secondary' }} text-white">
+                                    {{ ucfirst($student->status) }}
+                                </span>
+                            </td>
+                            <td>
+                                <!-- Edit Button -->
+                                <a href="{{ route('student.edit', $student->id) }}" class="btn btn-warning btn-sm me-1">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+
+                                <!-- Delete Button -->
+                                <form action="{{ route('student.destroy', $student->id) }}" method="POST" class="d-inline-block">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="7" class="text-center">No Students Found</td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection

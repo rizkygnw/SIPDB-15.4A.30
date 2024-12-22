@@ -15,7 +15,12 @@
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary"> <!--begin::App Wrapper-->
     <div class="app-wrapper">
         @include('layout.header')
-
+        {{-- Memisahkan admin dan siswa --}}
+        {{-- @if (request()->user()->role=='siswa')
+            @include('layout.sidebarSiswa')
+        @else
+            @include('layout.sidebar')
+        @endif --}}
         @include('layout.sidebar')
 
         <!--begin::App Main-->

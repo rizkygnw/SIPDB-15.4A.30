@@ -24,7 +24,7 @@ class DocumentRequest extends FormRequest
         return [
             'student_id' => 'required|exists:students,id',
             'document_type' => 'required|string|max:255',
-            'file_path' => 'required|string|max:255',
+            'file' => 'required|string|max:255',
         ];
     }
     public function messages()
