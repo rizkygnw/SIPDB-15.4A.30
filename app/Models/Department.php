@@ -10,4 +10,9 @@ class Department extends Model
     use HasFactory;
 
     protected $fillable = ['name'];
+
+    public function students()
+    {
+        return $this->belongsToMany(Student::class, 'department_student');
+    }
 }
