@@ -1,22 +1,41 @@
 <?php
 
-use App\Http\Controllers\DepartmentController;
-use App\Http\Controllers\DocumentController;
-use App\Http\Controllers\LogController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\RegistrationController;
-use App\Http\Controllers\StudentController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\DepartmentController;
+use App\Http\Controllers\Admin\DocumentController;
+use App\Http\Controllers\Admin\LogController;
+use App\Http\Controllers\Admin\PaymentController;
+use App\Http\Controllers\Admin\StudentController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\RegistrationController;
+use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\UserDocumentController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserDataController;
 
-Route::get('/userdata/foto/{id}', [UserDataController::class, 'foto'])->name('userdata.foto');
-Route::resource('userdata', UserDataController::class)->parameters([
-    'userdata' => 'userData',
-]);
-Route::get('/',function(){ return view('layout');});
-Route::resource('student', StudentController::class);
-Route::resource('registrations', RegistrationController::class);
-Route::resource('payments', PaymentController::class);
-Route::resource('logs', LogController::class);
-Route::resource('documents', DocumentController::class);
-Route::resource('departments', DepartmentController::class);
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
+
+// user route
+Route::middleware(['auth', 'userMiddleware'])->group(function(){
+    Route::get('dashboard',[UserController::class,'index'])->name('dashboard');
+    Route::resource('/user/registrations', RegistrationController::class);
+});
+
+// admin route
+Route::middleware(['auth', 'adminMiddleware'])->group(function(){
+    Route::get('/admin/dashboard',[AdminController::class,'index'])->name('admin.dashboard');
+    Route::resource('/admin/students', StudentController::class);
+    Route::resource('/admin/documents', DocumentController::class);
+    Route::resource('/admin/departments', DepartmentController::class);
+    Route::resource('/admin/payments', PaymentController::class);
+    Route::resource('/admin/logs', LogController::class);
+});

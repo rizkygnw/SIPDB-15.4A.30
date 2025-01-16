@@ -29,7 +29,6 @@ class StudentRequest extends FormRequest
             'status' => 'required|string|max:50',
         ];
     }
-
     public function messages()
     {
         return [
