@@ -39,37 +39,35 @@ class RegistrationController extends Controller
             'school_origin' => 'required|string|max:255',
             'departments' => 'required|array',
             'departments.*' => 'exists:departments,id',
-            'document_type' => 'required|string|max:255',
-            'file' => 'required|file|mimes:pdf,jpg,png,docx|max:10240',
+            'file' => 'required|array',
+            'file.*' => 'file|mimes:pdf,jpg,png,docx|max:10240',
+            'document_type' => 'required|array',
+            'document_type.*' => 'string|max:255',
         ]);
-        if (Student::where('user_id', Auth::id())->exists()) {
-            return redirect()->back()->withErrors(['error' => 'You have already registered.']);
-        }
 
-        // Create the student and associate it with the logged-in user
+        // Create student
         $student = Student::create([
-            'user_id' => Auth::id(), // Associate the student with the currently logged-in user
+            'user_id' => Auth::id(),
             'name' => $request->name,
             'address' => $request->address,
             'birth_date' => $request->birth_date,
             'school_origin' => $request->school_origin,
-            'status' => 'Pendaftaran', // Set default status as Pendaftaran
+            'status' => 'Pendaftaran',
         ]);
 
-        // Sync departments (many-to-many relationship)
+        // Sync departments
         $student->departments()->sync($request->departments);
 
-        // Handle document upload
-        $filePath = $request->file('file')->store('documents', 'public');
+        // Handle document uploads
+        foreach ($request->file('file') as $index => $file) {
+            $filePath = $file->store('documents', 'public');
+            Document::create([
+                'student_id' => $student->id,
+                'file_path' => $filePath,
+                'document_type' => $request->input('document_type')[$index],
+            ]);
+        }
 
-        // Save the document information in the Document table
-        Document::create([
-            'student_id' => $student->id,
-            'document_type' => $request->document_type,
-            'file_path' => $filePath,
-        ]);
-
-        // Redirect back with a success message
         return redirect()->route('students.index')->with('success', 'Student registered successfully!');
     }
 }
