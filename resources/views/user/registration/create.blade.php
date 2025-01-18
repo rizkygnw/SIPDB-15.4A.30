@@ -62,14 +62,16 @@
                         @error('departments') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
 
-                    <div class="mb-4">
-                        <label for="ijazah" class="form-label">Upload Ijazah</label>
-                        <input type="file" name="ijazah" class="form-control" required>
+                    <div class="document-field">
+                        <label for="ijazah">Upload Ijazah:</label>
+                        <input type="hidden" name="document_type[]" value="Ijazah">
+                        <input type="file" name="file[]" required>
                     </div>
 
-                    <div class="mb-4">
-                        <label for="foto" class="form-label">Upload Foto</label>
-                        <input type="file" name="foto" class="form-control" required>
+                    <div class="document-field">
+                        <label for="akte">Upload Akte:</label>
+                        <input type="hidden" name="document_type[]" value="Akte">
+                        <input type="file" name="file[]" required>
                     </div>
 
                     <div class="text-end">

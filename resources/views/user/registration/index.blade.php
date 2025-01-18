@@ -26,6 +26,21 @@
                                         <strong>School Origin:</strong> {{ $student->school_origin }}<br>
                                         <strong>Status:</strong> {{ $student->status }}
                                     </p>
+
+                                    <!-- Display Documents -->
+                                    @if ($student->documents->isNotEmpty())
+                                        <h6>Uploaded Documents:</h6>
+                                        <ul>
+                                            @foreach ($student->documents as $document)
+                                                <li>
+                                                    <strong>{{ $document->document_type }}:</strong>
+                                                    <a href="{{ Storage::url($document->file_path) }}" target="_blank">View File</a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @else
+                                        <p>No documents uploaded.</p>
+                                    @endif
                                 </div>
                             </div>
                         </div>
