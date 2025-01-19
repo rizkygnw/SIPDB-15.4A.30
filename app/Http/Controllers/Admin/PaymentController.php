@@ -16,9 +16,14 @@ class PaymentController extends Controller
         return view('admin.payments.index', compact('payments'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        $students = Student::all();
+        // Agar berurutan sesuai huruf pertama
+        // $search = $request->input('search'); // Ambil input pencarian
+        // $students = Student::when($search, function ($query, $search) {
+        //     $query->where('name', 'like', "%{$search}%"); // Filter berdasarkan nama
+        // })->orderBy('name', 'asc')->get();
+        $students = Student::orderBy('name', 'asc')->get();
         return view('admin.payments.create', compact('students'));
     }
 
@@ -32,6 +37,10 @@ class PaymentController extends Controller
         ]);
 
         Payment::create($request->all());
+
+        $student = Student::find($request->student_id);
+        $student->payment_status = 'Sudah Dibayar';
+        $student->save();
 
         return redirect()->route('payments.index')->with('success', 'Payment added successfully.');
     }

@@ -13,7 +13,10 @@
 
             @if(Auth::user()->students()->exists())
                 <div class="alert alert-warning m-4">
-                    Kamu sudah melakukan registrasi
+                    Kamu sudah melakukan registrasi.
+                </div>
+                <div class="alert alert-success m-4">
+                    Harap menunggu informasi lebih lanjut dari admin untuk melakukan pembayaran.
                 </div>
             @else
                 <!-- Formulir Pendaftaran -->

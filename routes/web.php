@@ -33,7 +33,7 @@ Route::middleware(['auth', 'userMiddleware'])->group(function(){
 Route::middleware(['auth', 'adminMiddleware'])->group(function(){
     Route::get('/admin/dashboard',[AdminController::class,'index'])->name('admin.dashboard');
     Route::resource('/admin/students', StudentController::class);
-    Route::resource('/admin/documents', DocumentController::class);
+    Route::resource('/admin/documents', DocumentController  ::class);
     Route::resource('/admin/departments', DepartmentController::class);
     Route::resource('/admin/payments', PaymentController::class);
     Route::resource('/admin/logs', LogController::class);

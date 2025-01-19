@@ -49,6 +49,12 @@
                                             {{ ucfirst($student->status) }}
                                         </span>
                                     </p>
+                                    <p>
+                                        <span class="font-medium text-gray-800">Status Pembayaran:</span>
+                                        <span class="badge {{ $student->payment_status == 'Sudah Dibayar' ? 'bg-success' : 'bg-secondary' }} text-white">
+                                            {{ ucfirst($student->payment_status) }}
+                                        </span>
+                                    </p>
                                 </div>
 
                                 <!-- Documents Section -->

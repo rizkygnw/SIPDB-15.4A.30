@@ -16,18 +16,14 @@ class StudentController extends Controller
         // Mengambil nilai pencarian dari request
         $search = $request->input('search');
 
-        // Query awal
         $students = Student::query();
 
-        // Jika ada parameter pencarian, tambahkan filter
         if ($search) {
             $students->where('name', 'LIKE', "%{$search}%");
         }
 
-        // Ambil data dari database
         $students = $students->get();
 
-        // Tampilkan data ke view
         return view('admin.students.index', compact('students'));
     }
 
@@ -76,7 +72,6 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         $student->delete();
-
-        return redirect()->route('students.index')->with('success', 'Student deleted and auto increment updated successfully.');
+        return redirect()->route('students.index')->with('success', 'Student soft-deleted successfully.');
     }
 }
