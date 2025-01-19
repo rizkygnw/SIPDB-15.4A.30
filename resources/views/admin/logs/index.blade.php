@@ -1,47 +1,43 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Logs') }}
+            {{ __('Activity Logs') }}
         </h2>
     </x-slot>
 
-    <div class="table-responsive">
-        <div class="container"><br>
-            <a href="{{ route('logs.create') }}" class="btn btn-primary mb-3">Create Log</a>
-
-            @if(session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
-            @endif
-
-            <table class="table table-hover table-bordered text-center align-middle mb-0">
-                <thead class="table-dark">
+    {{-- Konten utama --}}
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <h1>Silahkan Refresh Jika Log Tidak Muncul</h1><br>
+            <table class="min-w-full bg-white shadow-md rounded">
+                <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>User</th>
-                        <th>Activity</th>
-                        <th>Actions</th>
+                        <th class="px-4 py-2 text-left">User</th>
+                        <th class="px-4 py-2 text-left">Description</th>
+                        <th class="px-4 py-2 text-left">Log Name</th>
+                        <th class="px-4 py-2 text-left">Created At</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($logs as $log)
-                    <tr>
-                        <td>{{ $log->id }}</td>
-                        <td>{{ $log->user->name }}</td>
-                        <td>{{ $log->activity }}</td>
-                        <td>
-                            <a href="{{ route('logs.edit', $log) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <form action="{{ route('logs.destroy', $log) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                    @endforeach
+                    @forelse ($logs as $log)
+                        <tr>
+                            <td class="px-4 py-2">{{ $log->causer->name ?? 'Guest' }}</td>
+                            <td class="px-4 py-2">{{ $log->description }}</td>
+                            <td class="px-4 py-2">{{ $log->log_name }}</td>
+                            <td class="px-4 py-2">{{ $log->created_at }}</td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="4" class="px-4 py-2 text-center">No activity logs found.</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
 
-            {{ $logs->links() }}
+            {{-- Pagination links --}}
+            <div class="mt-4">
+                {{ $logs->links() }}
+            </div>
         </div>
     </div>
 </x-app-layout>

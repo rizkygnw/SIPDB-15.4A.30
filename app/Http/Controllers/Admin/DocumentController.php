@@ -12,7 +12,9 @@ class DocumentController extends Controller
 {
     public function index()
     {
-        $documents = Document::all();
+        $documents = Document::with('student')
+        ->get()
+        ->groupBy('student_id');
         return view('admin.documents.index', compact('documents'));
     }
 

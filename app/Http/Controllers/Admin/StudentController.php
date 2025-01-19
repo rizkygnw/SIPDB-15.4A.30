@@ -75,15 +75,7 @@ class StudentController extends Controller
 
     public function destroy(Student $student)
     {
-        $deletedId = $student->id;
         $student->delete();
-
-        // Student::where('id', '>', $deletedId)
-        //         ->decrement('id', 1);
-
-        // $lastId = Student::max('id');
-        // $newAutoIncrement = $lastId + 1;
-        // DB::statement("ALTER TABLE user_data AUTO_INCREMENT = $newAutoIncrement;");
 
         return redirect()->route('students.index')->with('success', 'Student deleted and auto increment updated successfully.');
     }
