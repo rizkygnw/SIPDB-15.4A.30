@@ -1,13 +1,13 @@
-# SISTEM INFORMASI PENERIMAAN SISWA BARU (SIPDB)
----
+# SISTEM INFORMASI PENERIMAAN SISWA BARU (SIPDB) 2024/2025
 
 ## Kontributor
 - Rizky Gunawan (15225007)
 - Joan Cristiyono (15225006)
 - Roy Jordy (15225005)
-
+---
 - Universitas Bina Sarana Informatika Kampus Kota Pontianak
 - Program Studi Informatika Kampus Kota Pontianak
+- Kelas: 15.4A.30
 - Mata Kuliah: Web Programming 2
 - Dosen Pengampu: **Agung Sasongko, S. Kom, M. Kom.**
 

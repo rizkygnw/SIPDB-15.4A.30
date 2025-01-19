@@ -13,10 +13,8 @@ class RegistrationController extends Controller
 {
     public function index()
     {
-        // Get the currently logged-in user
         $user = Auth::user();
 
-        // Get students associated with the logged-in user
         $students = $user->students; // Use the relationship
 
         return view('user.registration.index', compact('students'));
