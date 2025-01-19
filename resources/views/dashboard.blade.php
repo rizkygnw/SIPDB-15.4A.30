@@ -44,7 +44,7 @@
 
                     <!-- Contact Us -->
                     <div class="mt-12 text-center">
-                        <a class="bg-blue-500 text-white py-2 px-6 rounded-full hover:bg-blue-600 transition duration-300">Hubungi Kami</a>
+                        <a href="{{ url('user/registrations/create') }}" class="bg-blue-500 text-white py-2 px-6 rounded-full hover:bg-blue-600 transition duration-300">Lanjut Pendaftaran</a>
                     </div>
                 </div>
             </div>

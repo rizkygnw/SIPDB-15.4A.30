@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-3xl text-gray-900 leading-tight">
-            {{ __('Student Registrations') }}
+            {{ __('Status Siswa') }}
         </h2>
     </x-slot>
 
@@ -9,7 +9,7 @@
         <div class="container mx-auto px-6">
             <!-- Title -->
             <h1 class="text-5xl font-extrabold mb-12 text-center text-gray-900">
-                Siswa Terdaftar
+                Detail Siswa
             </h1>
 
             <!-- Check if there are students -->
