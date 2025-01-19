@@ -7,14 +7,22 @@
 
     <div class="py-12">
         <div class="container">
-            <h1>Add Payment</h1>
+            <!-- Form Pencarian -->
+            {{-- <form action="{{ route('payments.create') }}" method="GET" class="mb-3">
+                <div class="input-group">
+                    <input type="text" name="search" value="{{ $search ?? '' }}" class="form-control" placeholder="Search students...">
+                    <button type="submit" class="btn btn-secondary">Search</button>
+                </div>
+            </form> --}}
+
+            <!-- Form Payment -->
             <form action="{{ route('payments.store') }}" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="student_id" class="form-label">Student</label>
                     <select name="student_id" id="student_id" class="form-control">
                         @foreach ($students as $student)
-                        <option value="{{ $student->id }}">{{ $student->name }}</option>
+                            <option value="{{ $student->id }}">{{ $student->name }}</option>
                         @endforeach
                     </select>
                 </div>

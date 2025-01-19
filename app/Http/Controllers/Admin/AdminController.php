@@ -19,7 +19,6 @@ class AdminController extends Controller
         $registrasi = DB::table('students')->where('status', 'Registrasi Ulang')->count();
         $pending = DB::table('students')->where('status', 'Pendaftaran')->count();
 
-        // Kirim data ke view
         return view('admin.dashboard', [
             'totalPendaftar' => $totalPendaftar,
             'diterima' => $diterima,

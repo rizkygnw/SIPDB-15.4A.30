@@ -7,7 +7,6 @@
 
     <div class="container mt-4">
         <div class="card shadow-sm">
-            <!-- Card Header -->
             <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                 <h3 class="mb-0">Students List</h3>
                 <a href="{{ route('students.create') }}" class="btn btn-light btn-sm">
@@ -15,7 +14,6 @@
                 </a>
             </div>
 
-            <!-- Card Body -->
             <div class="card-body">
                 <!-- Search Form -->
                 <form method="GET" action="{{ route('students.index') }}" class="mb-3">
@@ -25,7 +23,6 @@
                     </div>
                 </form>
 
-                <!-- Responsive Table -->
                 <div class="table-responsive">
                     <table class="table table-hover table-bordered text-center align-middle mb-0">
                         <thead class="table-dark">
@@ -53,12 +50,10 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <!-- Edit Button -->
                                     <a href="{{ route('students.edit', $student->id) }}" class="btn btn-warning btn-sm me-1">
                                         <i class="bi bi-pencil-square">Edit</i>
                                     </a>
 
-                                    <!-- Delete Button -->
                                     <form action="{{ route('students.destroy', $student->id) }}" method="POST" class="d-inline-block">
                                         @csrf
                                         @method('DELETE')

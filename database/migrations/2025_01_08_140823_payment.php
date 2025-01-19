@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('receipt_number')->unique();
             $table->timestamps();
 
-            $table->foreign('student_id')->references('id')->on('students');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
         });
     }
 
