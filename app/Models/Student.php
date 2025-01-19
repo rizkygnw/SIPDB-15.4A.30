@@ -18,11 +18,6 @@ class Student extends Model
         'status',
     ];
 
-    public function userData()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
     public function departments()
     {
         return $this->belongsToMany(Department::class, 'department_student');
@@ -31,5 +26,10 @@ class Student extends Model
     public function documents()
     {
         return $this->hasMany(Document::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
