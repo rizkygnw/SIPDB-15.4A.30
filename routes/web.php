@@ -9,7 +9,6 @@ use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\RegistrationController;
 use App\Http\Controllers\User\UserController;
-use App\Http\Controllers\User\UserDocumentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {

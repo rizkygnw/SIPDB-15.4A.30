@@ -14,6 +14,9 @@ class AdminController extends Controller
         $totalPendaftar = DB::table('students')->count();
         $diterima = DB::table('students')->where('status', 'Diterima')->count();
         $ditolak = DB::table('students')->where('status', 'Ditolak')->count();
+        $seleksi = DB::table('students')->where('status', 'Seleksi')->count();
+        $tes = DB::table('students')->where('status', 'Tes Minat Bakat')->count();
+        $registrasi = DB::table('students')->where('status', 'Registrasi Ulang')->count();
         $pending = DB::table('students')->where('status', 'Pendaftaran')->count();
 
         // Kirim data ke view
@@ -21,6 +24,9 @@ class AdminController extends Controller
             'totalPendaftar' => $totalPendaftar,
             'diterima' => $diterima,
             'ditolak' => $ditolak,
+            'seleksi' => $seleksi,
+            'tes' => $tes,
+            'registrasi' => $registrasi,
             'pending' => $pending,
         ]);
     }
