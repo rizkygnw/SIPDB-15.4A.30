@@ -11,9 +11,23 @@ use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $students = Student::all();
+        // Mengambil nilai pencarian dari request
+        $search = $request->input('search');
+
+        // Query awal
+        $students = Student::query();
+
+        // Jika ada parameter pencarian, tambahkan filter
+        if ($search) {
+            $students->where('name', 'LIKE', "%{$search}%");
+        }
+
+        // Ambil data dari database
+        $students = $students->get();
+
+        // Tampilkan data ke view
         return view('admin.students.index', compact('students'));
     }
 

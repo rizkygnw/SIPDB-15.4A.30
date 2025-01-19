@@ -1,21 +1,20 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Logs') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="container">
-            <h1>Logs</h1>
+    <div class="table-responsive">
+        <div class="container"><br>
             <a href="{{ route('logs.create') }}" class="btn btn-primary mb-3">Create Log</a>
 
             @if(session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
 
-            <table class="table table-bordered">
-                <thead>
+            <table class="table table-hover table-bordered text-center align-middle mb-0">
+                <thead class="table-dark">
                     <tr>
                         <th>ID</th>
                         <th>User</th>

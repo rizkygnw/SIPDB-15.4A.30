@@ -16,33 +16,6 @@ class DocumentController extends Controller
         return view('admin.documents.index', compact('documents'));
     }
 
-    public function create()
-    {
-        $students = Student::all(); // Ambil data student
-        return view('admin.documents.create', compact('students'));
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'student_id' => 'required|exists:students,id',
-            'document_type' => 'required|string|max:255',
-            'file' => 'required|file|mimes:pdf,jpg,png,docx|max:10240', // File type validation
-        ]);
-
-        // Proses unggah file
-        $filePath = $request->file('file')->store('documents', 'public');
-
-        // Menyimpan data ke database
-        Document::create([
-            'student_id' => $request->student_id,
-            'document_type' => $request->document_type,
-            'file_path' => $filePath,
-        ]);
-
-        return redirect()->route('documents.index')->with('success', 'Document uploaded successfully!');
-    }
-
     public function edit(Document $document)
     {
         $students = Student::all();

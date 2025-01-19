@@ -1,16 +1,17 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Payments') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="table-responsive">
         <div class="container">
-            <h1>Payments</h1>
+            <br>
             <a href="{{ route('payments.create') }}" class="btn btn-primary">Add Payment</a>
-            <table class="table mt-3">
-                <thead>
+            <br><br>
+            <table class="table table-hover table-bordered text-center align-middle mb-0">
+                <thead class="table-dark">
                     <tr>
                         <th>ID</th>
                         <th>Student</th>
