@@ -1,17 +1,18 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Departments') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="table-responsive">
         <div class="container">
-            <h1>Departments</h1>
+            <br>
             <a href="{{ route('departments.create') }}" class="btn btn-primary">Upload New Document</a>
-
-            <table class="table mt-4">
-                <thead>
+            <br>
+            <br>
+            <table class="table table-hover table-bordered text-center align-middle mb-0">
+                <thead class="table-dark">
                     <tr>
                         <th>Name</th>
                         <th>Actions</th>

@@ -31,7 +31,7 @@ class RegistrationController extends Controller
 
     public function store(Request $request)
     {
-        // Validate form data
+        // Validate form dataz`
         $request->validate([
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:500',
