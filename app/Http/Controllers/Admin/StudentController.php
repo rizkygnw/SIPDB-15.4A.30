@@ -40,20 +40,42 @@ class StudentController extends Controller
 
     public function store(Request $request)
     {
-        $lastUser = User::orderBy('id', 'desc')->first();
-
-        $userId = $lastUser ? $lastUser->id : 1;
-
-        Student::create([
-            'user_id' => $userId,
-            'name' => $request->name,
-            'address' => $request->address,
-            'birth_date' => $request->birth_date,
-            'school_origin' => $request->school_origin,
-            'status' => $request->status,
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8',
+            'address' => 'required|string',
+            'birth_date' => 'required|date',
+            'school_origin' => 'required|string',
+            'status' => 'required|in:Pendaftaran,Seleksi,Tes Minat Bakat,Registrasi Ulang,Diterima,Ditolak',
         ]);
 
-        return redirect()->route('students.index')->with('success', 'Student added successfully.');
+        DB::beginTransaction();
+        try {
+            // Buat data user
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+            ]);
+
+            // Buat data student
+            Student::create([
+                'user_id' => $user->id,
+                'name' => $request->name,
+                'address' => $request->address,
+                'birth_date' => $request->birth_date,
+                'school_origin' => $request->school_origin,
+                'status' => $request->status,
+            ]);
+
+            DB::commit();
+
+            return redirect()->route('students.index')->with('success', 'Student added successfully.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors(['error' => 'Failed to add student: ' . $e->getMessage()]);
+        }
     }
 
     public function update(StudentRequest $request, Student $student)
