@@ -23,5 +23,5 @@
 - Framework: Laravel 11
 - Bahasa Pemrograman: PHP 8.3.13, Java Script
 - Database: MySQL
-- Frontend: Blade Template, Bootstrap
-- Library Pendukung: Laravel Breeze, Satie, Chart.JS
+- Frontend: Blade Template, Bootstrap, Tailwind
+- Library Pendukung: Laravel Breeze, Satie, Chart.JS, NPM
