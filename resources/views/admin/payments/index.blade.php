@@ -5,42 +5,58 @@
         </h2>
     </x-slot>
 
-    <div class="table-responsive">
-        <div class="container">
-            <br>
-            <a href="{{ route('payments.create') }}" class="btn btn-primary">Add Payment</a>
-            <br><br>
-            <table class="table table-hover table-bordered text-center align-middle mb-0">
-                <thead class="table-dark">
-                    <tr>
-                        <th>ID</th>
-                        <th>Student</th>
-                        <th>Payment Date</th>
-                        <th>Amount</th>
-                        <th>Receipt Number</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($payments as $payment)
-                    <tr>
-                        <td>{{ $payment->id }}</td>
-                        <td>{{ $payment->student->name }}</td>
-                        <td>{{ $payment->payment_date }}</td>
-                        <td>{{ $payment->amount }}</td>
-                        <td>{{ $payment->receipt_number }}</td>
-                        <td>
-                            <a href="{{ route('payments.edit', $payment) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <form action="{{ route('payments.destroy', $payment) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+    <div class="container mt-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h3 class="mb-0">Payments List</h3>
+                <a href="{{ route('payments.create') }}" class="btn btn-light btn-sm">
+                    <i class="bi bi-cash-coin me-1"></i> Add Payment
+                </a>
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered text-center align-middle mb-0">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Student</th>
+                                <th>Payment Date</th>
+                                <th>Amount</th>
+                                <th>Receipt Number</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($payments as $payment)
+                                <tr>
+                                    <td>{{ $payment->id }}</td>
+                                    <td class="fw-semibold">{{ $payment->student->name }}</td>
+                                    <td>{{ $payment->payment_date }}</td>
+                                    <td>Rp{{ number_format($payment->amount, 0, ',', '.') }}</td>
+                                    <td>{{ $payment->receipt_number }}</td>
+                                    <td>
+                                        <a href="{{ route('payments.edit', $payment) }}" class="btn btn-warning btn-sm me-1">
+                                            <i class="bi bi-pencil-square"></i> Edit
+                                        </a>
+                                        <form action="{{ route('payments.destroy', $payment) }}" method="POST" class="d-inline-block" onsubmit="return confirm('Are you sure?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <i class="bi bi-trash"></i> Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="6" class="text-center text-muted">No Payments Found</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </x-app-layout>

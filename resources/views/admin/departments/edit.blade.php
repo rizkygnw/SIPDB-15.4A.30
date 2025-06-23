@@ -1,21 +1,42 @@
-
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Edit Department') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="container">
-            <h1>Edit Department</h1>
-            <form action="{{ route('departments.update', $department->id) }}" method="POST">
-                @csrf
-                @method('PUT')
-                <label for="name">Department Name:</label>
-                <input type="text" name="name" id="name" value="{{ $department->name }}" required>
-                <button type="submit" class="btn btn-primary">Update</button>
-            </form>
+    <div class="container mt-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h3 class="mb-0">Edit Department</h3>
+                <a href="{{ route('departments.index') }}" class="btn btn-light btn-sm">
+                    <i class="bi bi-arrow-left me-1"></i> Back to Departments
+                </a>
+            </div>
+
+            <div class="card-body">
+                <form action="{{ route('departments.update', $department->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Department Name</label>
+                        <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name', $department->name) }}" required>
+                        @error('name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-save me-1"></i> Update
+                        </button>
+                        <a href="{{ route('departments.index') }}" class="btn btn-secondary">
+                            <i class="bi bi-x-circle me-1"></i> Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </x-app-layout>

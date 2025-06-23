@@ -1,45 +1,54 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-2xl text-gray-900 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Departments') }}
         </h2>
     </x-slot>
 
-    <div class="container my-8">
-        <div class="flex justify-between items-center mb-6">
-            <a href="{{ route('departments.create') }}" class="btn btn-success px-6 py-2 text-white font-semibold rounded-md shadow-md hover:bg-green-700 transition duration-300 ease-in-out">
-                <i class="btn-primary mr-2"></i> Upload New Document
-            </a>
-        </div>
+    <div class="container mt-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h3 class="mb-0">Departments List</h3>
+                <a href="{{ route('departments.create') }}" class="btn btn-light btn-sm">
+                    <i class="bi bi-plus-circle me-1"></i> Add Department
+                </a>
+            </div>
 
-        <div class="overflow-x-auto bg-white shadow-lg rounded-lg">
-            <table class="table-auto w-full text-center border-collapse">
-                <thead class="bg-gradient-to-r from-blue-500 to-indigo-500 text-white">
-                    <tr>
-                        <th class="px-6 py-3 text-lg font-semibold">Department Name</th>
-                        <th class="px-6 py-3 text-lg font-semibold">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($departments as $department)
-                    <tr class="border-b hover:bg-gray-100">
-                        <td class="px-6 py-4 text-gray-700">{{ $department->name }}</td>
-                        <td class="px-6 py-4">
-                            <a href="{{ route('departments.edit', $department->id) }}" class="btn btn-warning text-white px-4 py-2 rounded-lg mr-2 hover:bg-yellow-600 transition duration-300 ease-in-out">
-                                Edit
-                            </a>
-                            <form action="{{ route('departments.destroy', $department->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300 ease-in-out">
-                                    Delete
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered text-center align-middle mb-0">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Department Name</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($departments as $department)
+                                <tr>
+                                    <td class="fw-semibold text-gray-800">{{ $department->name }}</td>
+                                    <td>
+                                        <a href="{{ route('departments.edit', $department->id) }}" class="btn btn-warning btn-sm me-1">
+                                            <i class="bi bi-pencil-square"></i> Edit
+                                        </a>
+                                        <form action="{{ route('departments.destroy', $department->id) }}" method="POST" class="d-inline-block" onsubmit="return confirm('Are you sure?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <i class="bi bi-trash"></i> Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="2" class="text-center text-muted">No Departments Found</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </x-app-layout>

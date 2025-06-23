@@ -5,38 +5,47 @@
         </h2>
     </x-slot>
 
-    {{-- Konten utama --}}
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <h1>Silahkan Refresh Jika Log Tidak Muncul</h1><br>
-            <table class="min-w-full bg-white shadow-md rounded">
-                <thead>
-                    <tr>
-                        <th class="px-4 py-2 text-left">User</th>
-                        <th class="px-4 py-2 text-left">Description</th>
-                        <th class="px-4 py-2 text-left">Log Name</th>
-                        <th class="px-4 py-2 text-left">Created At</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($logs as $log)
-                        <tr>
-                            <td class="px-4 py-2">{{ $log->causer->name ?? 'Guest' }}</td>
-                            <td class="px-4 py-2">{{ $log->description }}</td>
-                            <td class="px-4 py-2">{{ $log->log_name }}</td>
-                            <td class="px-4 py-2">{{ $log->created_at }}</td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="4" class="px-4 py-2 text-center">No activity logs found.</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
+    <div class="container mt-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
+                <h3 class="mb-0">Recent Activities</h3>
+            </div>
 
-            {{-- Pagination links --}}
-            <div class="mt-4">
-                {{ $logs->links() }}
+            <div class="card-body">
+                <div class="alert alert-info mb-3">
+                    <i class="bi bi-info-circle me-2"></i> Silakan refresh halaman jika log belum muncul.
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover text-center align-middle">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>User</th>
+                                <th>Description</th>
+                                <th>Log Name</th>
+                                <th>Created At</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($logs as $log)
+                                <tr>
+                                    <td>{{ $log->causer->name ?? 'Guest' }}</td>
+                                    <td class="text-start">{{ $log->description }}</td>
+                                    <td>{{ $log->log_name }}</td>
+                                    <td>{{ $log->created_at->format('d M Y, H:i') }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="text-muted">No activity logs found.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-4">
+                    {{ $logs->links() }}
+                </div>
             </div>
         </div>
     </div>

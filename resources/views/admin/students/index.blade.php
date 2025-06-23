@@ -38,35 +38,34 @@
                         </thead>
                         <tbody>
                             @forelse($students as $student)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td class="fw-semibold">{{ $student->name }}</td>
-                                <td>{{ $student->address }}</td>
-                                <td>{{ $student->birth_date }}</td>
-                                <td>{{ $student->school_origin }}</td>
-                                <td>
-                                    <span class="badge {{ $student->status == 'Diterima' ? 'bg-success' : 'bg-secondary' }} text-white">
-                                        {{ ucfirst($student->status) }}
-                                    </span>
-                                </td>
-                                <td>
-                                    <a href="{{ route('students.edit', $student->id) }}" class="btn btn-warning btn-sm me-1">
-                                        <i class="bi bi-pencil-square">Edit</i>
-                                    </a>
-
-                                    <form action="{{ route('students.destroy', $student->id) }}" method="POST" class="d-inline-block">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
-                                            <i class="bi bi-trash">Hapus</i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td class="fw-semibold">{{ $student->name }}</td>
+                                    <td>{{ $student->address }}</td>
+                                    <td>{{ $student->birth_date }}</td>
+                                    <td>{{ $student->school_origin }}</td>
+                                    <td>
+                                        <span class="badge {{ $student->status == 'Diterima' ? 'bg-success' : 'bg-secondary' }} text-white">
+                                            {{ ucfirst($student->status) }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('students.edit', $student->id) }}" class="btn btn-warning btn-sm me-1">
+                                            <i class="bi bi-pencil-square"></i> Edit
+                                        </a>
+                                        <form action="{{ route('students.destroy', $student->id) }}" method="POST" class="d-inline-block">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
+                                                <i class="bi bi-trash"></i> Hapus
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
                             @empty
-                            <tr>
-                                <td colspan="7" class="text-center">No Students Found</td>
-                            </tr>
+                                <tr>
+                                    <td colspan="7" class="text-center">No Students Found</td>
+                                </tr>
                             @endforelse
                         </tbody>
                     </table>
