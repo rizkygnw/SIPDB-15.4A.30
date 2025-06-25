@@ -16,6 +16,14 @@
                     <i class="bi bi-info-circle me-2"></i> Silakan refresh halaman jika log belum muncul.
                 </div>
 
+                <!-- Search Form -->
+                <form method="GET" action="{{ route('students.index') }}" class="mb-3">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Search by name..." value="{{ request('search') }}">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
+                </form>
+
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover text-center align-middle">
                         <thead class="table-dark">

@@ -262,7 +262,7 @@
                 </div>
                 <div class="p-4 bg-gray-50 rounded-lg">
                     <h4 class="font-semibold text-gray-800 mb-2">Dokumen apa saja yang wajib diunggah?</h4>
-                    <p class="text-gray-600 text-sm">Ijazah terakhir, kartu keluarga, pas foto, dan surat keterangan sehat.</p>
+                    <p class="text-gray-600 text-sm">Ijazah terakhir, pas foto, dan akte kelahiran.</p>
                 </div>
             </div>
         </section>
@@ -287,15 +287,15 @@
                     <div class="space-y-3 text-gray-300">
                         <div class="flex items-center space-x-3">
                             <i class="fas fa-phone"></i>
-                            <span>(021) 1234-5678</span>
+                            <span>(+628) 9631-2131-21</span>
                         </div>
                         <div class="flex items-center space-x-3">
                             <i class="fas fa-envelope"></i>
-                            <span>info@ppdb-online.id</span>
+                            <span>info@sipsis.id</span>
                         </div>
                         <div class="flex items-center space-x-3">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span>Jakarta, Indonesia</span>
+                            <span>Pontianak, Indonesia</span>
                         </div>
                     </div>
                 </div>

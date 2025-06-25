@@ -38,7 +38,7 @@ class RegistrationController extends Controller
             'departments' => 'required|array',
             'departments.*' => 'exists:departments,id',
             'file' => 'required|array',
-            'file.*' => 'file|mimes:pdf,jpg,png,docx|max:10240',
+            'file.*' => 'file|mimes:pdf,jpg,png,jpeg,docx|max:10240',
             'document_type' => 'required|array',
             'document_type.*' => 'string|max:255',
         ]);

@@ -20,7 +20,7 @@
 
                     <div class="mb-3">
                         <label for="student_id" class="form-label">Student</label>
-                        <select name="student_id" id="student_id" class="form-select @error('student_id') is-invalid @enderror">
+                        <select name="student_id" id="student_id" class="form-select select2 @error('student_id') is-invalid @enderror">
                             <option value="">Select a student</option>
                             @foreach ($students as $student)
                                 <option value="{{ $student->id }}" {{ old('student_id') == $student->id ? 'selected' : '' }}>
@@ -69,4 +69,15 @@
             </div>
         </div>
     </div>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            $('#student_id').select2({
+                placeholder: 'Select a student',
+                allowClear: true
+            });
+        });
+    </script>
 </x-app-layout>

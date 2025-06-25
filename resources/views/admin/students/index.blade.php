@@ -27,11 +27,12 @@
                     <table class="table table-hover table-bordered text-center align-middle mb-0">
                         <thead class="table-dark">
                             <tr>
-                                <th>#</th>
+                                <th>No</th>
                                 <th>Name</th>
                                 <th>Address</th>
                                 <th>Birth Date</th>
                                 <th>School Origin</th>
+                                <th>Departments</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -44,6 +45,11 @@
                                     <td>{{ $student->address }}</td>
                                     <td>{{ $student->birth_date }}</td>
                                     <td>{{ $student->school_origin }}</td>
+                                    <td>
+                                        @foreach($student->departments as $department)
+                                            <span class="badge bg-info text-dark">{{ $department->name }}</span>
+                                        @endforeach
+                                    </td>
                                     <td>
                                         <span class="badge {{ $student->status == 'Diterima' ? 'bg-success' : 'bg-secondary' }} text-white">
                                             {{ ucfirst($student->status) }}

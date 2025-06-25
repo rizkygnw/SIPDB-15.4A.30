@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Logout;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -47,5 +48,9 @@ class AppServiceProvider extends ServiceProvider
                 ->causedBy($event->user)
                 ->log('User registered');
         });
+
+        // if (app()->environment('production')) {
+        //     URL::forceScheme('https');
+        // }
     }
 }

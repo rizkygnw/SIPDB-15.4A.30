@@ -69,6 +69,7 @@
                             </div>
 
                             <!-- Upload Dokumen -->
+                            <p class="text-sm text-red-600 italic">Ukuran maksimal file: 2MB</p>
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 <div>
                                     <label class="block text-sm font-medium text-slate-700 mb-1">Upload Foto</label>

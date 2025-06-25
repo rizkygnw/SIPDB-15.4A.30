@@ -23,7 +23,6 @@ class StudentController extends Controller
         }
 
         $students = $students->get();
-
         return view('admin.students.index', compact('students'));
     }
 
