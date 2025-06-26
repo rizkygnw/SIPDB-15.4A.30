@@ -16,6 +16,17 @@
                     <i class="bi bi-info-circle me-2"></i> Silakan refresh halaman jika log belum muncul.
                 </div>
 
+                <div class="d-flex justify-content-end mb-3">
+                    <button id="btn-hapus-log" type="button" class="btn btn-danger">
+                        <i class="bi bi-trash-fill me-1"></i> Hapus Semua Log
+                    </button>
+
+                    <form id="form-hapus-log" action="{{ route('logs.destroy.all') }}" method="POST" class="d-none">
+                        @csrf
+                        @method('DELETE')
+                    </form>
+                </div>
+
                 <!-- Search Form -->
                 <form method="GET" action="{{ route('students.index') }}" class="mb-3">
                     <div class="input-group">
@@ -57,4 +68,43 @@
             </div>
         </div>
     </div>
+    @if(session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Sukses!',
+            text: '{{ session('success') }}',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#3085d6'
+        });
+    </script>
+    @endif
+
+    {{-- Hapus Log --}}
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const tombol = document.getElementById('btn-hapus-log');
+        const form = document.getElementById('form-hapus-log');
+
+        if (tombol && form) {
+            tombol.addEventListener('click', function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Yakin ingin menghapus semua log?',
+                    text: 'Tindakan ini tidak dapat dibatalkan!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        }
+    });
+    </script>
 </x-app-layout>

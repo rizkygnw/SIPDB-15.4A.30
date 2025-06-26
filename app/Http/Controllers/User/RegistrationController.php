@@ -66,6 +66,6 @@ class RegistrationController extends Controller
             ]);
         }
 
-        return redirect()->route('students.index')->with('success', 'Student registered successfully!');
+        return redirect()->route('registrations.create')->with('success', 'Pendaftaran siswa berhasil disimpan!');
     }
 }

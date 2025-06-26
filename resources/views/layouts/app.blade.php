@@ -28,6 +28,9 @@
     <script src="{{ asset('build/assets/app.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    {{-- Notifikasi Popup --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <style>
         :root {
             --primary-color: #3b82f6;

@@ -27,6 +27,7 @@ require __DIR__.'/auth.php';
 Route::middleware(['auth', 'userMiddleware'])->group(function(){
     Route::get('dashboard',[UserController::class,'index'])->name('dashboard');
     Route::resource('/user/registrations', RegistrationController::class);
+    Route::get('/user/registration/create', [RegistrationController::class, 'create'])->name('registrations.create');
 });
 
 // admin route
@@ -36,6 +37,7 @@ Route::middleware(['auth', 'adminMiddleware'])->group(function(){
     Route::resource('/admin/documents', DocumentController  ::class);
     Route::resource('/admin/departments', DepartmentController::class);
     Route::resource('/admin/payments', PaymentController::class);
-    Route::resource('/admin/logs', LogController::class);
+    Route::resource('/admin/logs', LogController::class)->only(['index']);
+    Route::delete('/admin/logs/delete-all', [LogController::class, 'destroyAll'])->name('logs.destroy.all');
     Route::get('/admin/export-siswa', [App\Http\Controllers\Admin\ExportController::class, 'export'])->name('siswa.export');
 });
