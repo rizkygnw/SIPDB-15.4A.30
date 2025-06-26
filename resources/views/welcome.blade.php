@@ -36,9 +36,10 @@
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-4">
                 <div class="bg-white/20 backdrop-blur-sm p-2 rounded-lg">
-                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    {{-- <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                    </svg>
+                    </svg> --}}
+                    <img src="{{ asset('image/Logo SIPSIS.png') }}" alt="Logo SIPSIS" class="w-10 h-10 rounded-lg" />
                 </div>
                 <div>
                     <h1 class="text-2xl md:text-3xl font-extrabold text-white">SIPSIS</h1>
@@ -81,11 +82,16 @@
         <!-- Hero Section -->
         <section class="text-center mb-12">
             <div class="bg-white/80 backdrop-blur-sm p-8 md:p-12 rounded-2xl shadow-2xl card-hover">
-                <div class="mb-8">
-                    <div class="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mx-auto flex items-center justify-center mb-6 pulse-glow">
+                <div class="flex flex-col items-center justify-center text-center px-4 py-8">
+                    {{-- <div class="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mx-auto flex items-center justify-center mb-6 pulse-glow">
                         <svg class="w-10 h-10 md:w-12 md:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
                         </svg>
+                    </div> --}}
+                    <div class="mb-8">
+                        <div class="w-24 h-24 md:w-28 md:h-28 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mx-auto flex items-center justify-center mb-6 shadow-xl ring-4 ring-white">
+                            <img src="{{ asset('image/Logo SIPSIS.png') }}" alt="Logo SIPSIS" class="w-16 h-16 object-contain rounded-lg" />
+                        </div>
                     </div>
                 </div>
                 <h2 class="text-2xl md:text-4xl font-bold mb-6 text-gray-800 leading-tight">
@@ -120,7 +126,12 @@
                         </div>
                         <h3 class="text-lg font-semibold text-green-800 mb-2">Selamat, {{ Auth::user()->name }}!</h3>
                         <p class="text-green-700 mb-4">Anda sudah berhasil masuk ke sistem.</p>
-                        <a href="{{ route('dashboard') }}" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition font-semibold inline-flex items-center space-x-2">
+
+                        @php
+                            $redirectDashboard = route(Auth::user()->usertype === 'admin' ? 'admin.dashboard' : 'dashboard');
+                        @endphp
+
+                        <a href="{{ $redirectDashboard }}" data-turbo="false" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition font-semibold inline-flex items-center space-x-2">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
                             </svg>
@@ -351,7 +362,7 @@
         });
 
         // Add smooth scrolling for all internal links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));

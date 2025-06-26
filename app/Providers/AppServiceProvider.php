@@ -49,8 +49,8 @@ class AppServiceProvider extends ServiceProvider
                 ->log('User registered');
         });
 
-        // if (app()->environment('production')) {
-        //     URL::forceScheme('https');
-        // }
+        if (app()->environment('production')) {
+            URL::forceScheme('https');
+        }
     }
 }
