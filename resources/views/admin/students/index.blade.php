@@ -26,6 +26,9 @@
                 <div class="table-responsive">
                     <table class="table table-hover table-bordered text-center align-middle mb-0">
                         <thead class="table-dark">
+                            <a href="{{ route('siswa.export') }}" class="btn btn-success mb-3">
+                                Download Data Siswa (.xlsx)
+                            </a>
                             <tr>
                                 <th>No</th>
                                 <th>Name</th>

@@ -37,4 +37,5 @@ Route::middleware(['auth', 'adminMiddleware'])->group(function(){
     Route::resource('/admin/departments', DepartmentController::class);
     Route::resource('/admin/payments', PaymentController::class);
     Route::resource('/admin/logs', LogController::class);
+    Route::get('/admin/export-siswa', [App\Http\Controllers\Admin\ExportController::class, 'export'])->name('siswa.export');
 });
