@@ -181,6 +181,16 @@
                         </div>
                     @endforeach
                 </div>
+                <div class="mt-8 flex justify-end">
+                    <a href="{{ route('registration.print', $student->id) }}"
+                       target="_blank"
+                       class="inline-flex items-center px-6 py-3 rounded-xl text-white bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 transition-all duration-200 shadow-lg hover:shadow-emerald-300/40">
+                           <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                           <path stroke-linecap="round" stroke-linejoin="round" d="M6 9V2h12v7M6 18h12v-6H6v6zM6 22h12"></path>
+                           </svg>
+                        Cetak Bukti Pendaftaran
+                    </a>
+                </div>
             @endif
         </div>
     </div>

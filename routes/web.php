@@ -28,6 +28,7 @@ Route::middleware(['auth', 'userMiddleware'])->group(function(){
     Route::get('dashboard',[UserController::class,'index'])->name('dashboard');
     Route::resource('/user/registrations', RegistrationController::class);
     Route::get('/user/registration/create', [RegistrationController::class, 'create'])->name('registrations.create');
+    Route::get('/registration/print/{id}', [RegistrationController::class, 'print'])->name('registration.print');
 });
 
 // admin route

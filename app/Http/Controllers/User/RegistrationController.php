@@ -8,6 +8,7 @@ use App\Models\Document;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class RegistrationController extends Controller
 {
@@ -67,5 +68,15 @@ class RegistrationController extends Controller
         }
 
         return redirect()->route('registrations.create')->with('success', 'Pendaftaran siswa berhasil disimpan!');
+    }
+
+    public function print($id)
+    {
+        $student = Student::with('departments', 'documents')->findOrFail($id);
+
+        $pdf = Pdf::loadView('pdf.registration', compact('student'))
+                ->setPaper('A4', 'portrait');
+
+        return $pdf->stream('bukti-pendaftaran.pdf');
     }
 }
