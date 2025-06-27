@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Penerimaan Siswa Baru</title>
+    <title>SIPSIS - Sistem Penerimaan Siswa Baru</title>
+    <link rel="icon" href="{{ asset('image/logo-sipsis.png') }}" type="image/png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -39,7 +40,7 @@
                     {{-- <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                     </svg> --}}
-                    <img src="{{ asset('image/Logo SIPSIS.png') }}" alt="Logo SIPSIS" class="w-10 h-10 rounded-lg" />
+                    <img src="{{ asset('image/logo-sipsis.png') }}" alt="Logo SIPSIS" class="w-10 h-10 rounded-lg" />
                 </div>
                 <div>
                     <h1 class="text-2xl md:text-3xl font-extrabold text-white">SIPSIS</h1>
@@ -52,7 +53,10 @@
                     @auth
                         <div class="flex items-center space-x-4">
                             <span class="text-white text-sm hidden md:inline">Selamat datang, {{ Auth::user()->name }}!</span>
-                            <a href="{{ route('dashboard') }}" class="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-lg border border-white/30 hover:bg-white/30 hover:text-gray-800 transition duration-300 transform hover:scale-105 text-sm">
+                            @php
+                                $redirectDashboard = route(Auth::user()->usertype === 'admin' ? 'admin.dashboard' : 'dashboard');
+                            @endphp
+                            <a href="{{ $redirectDashboard }}" data-turbo="false" class="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-lg border border-white/30 hover:bg-white/30 hover:text-gray-800 transition duration-300 transform hover:scale-105 text-sm">
                                 Dashboard
                             </a>
                             <form method="POST" action="{{ route('logout') }}" class="inline">
@@ -90,7 +94,7 @@
                     </div> --}}
                     <div class="mb-8">
                         <div class="w-24 h-24 md:w-28 md:h-28 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mx-auto flex items-center justify-center mb-6 shadow-xl ring-4 ring-white">
-                            <img src="{{ asset('image/Logo SIPSIS.png') }}" alt="Logo SIPSIS" class="w-16 h-16 object-contain rounded-lg" />
+                            <img src="{{ asset('image/logo-sipsis.png') }}" alt="Logo SIPSIS" class="w-16 h-16 object-contain rounded-lg" />
                         </div>
                     </div>
                 </div>
@@ -191,15 +195,15 @@
                 <div class="space-y-4">
                     <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg border border-blue-200">
                         <p class="text-sm text-gray-600 mb-1">📅 Pendaftaran</p>
-                        <p class="font-bold text-blue-600 text-lg">1 Januari - 1 Februari 2025</p>
+                        <p class="font-bold text-blue-600 text-lg">1 Juli - 1 Agustus 2025</p>
                     </div>
                     <div class="bg-gradient-to-r from-yellow-50 to-yellow-100 p-4 rounded-lg border border-yellow-200">
                         <p class="text-sm text-gray-600 mb-1">📋 Seleksi</p>
-                        <p class="font-bold text-yellow-600">5 - 10 Februari 2025</p>
+                        <p class="font-bold text-yellow-600">5 - 10 Agustus 2025</p>
                     </div>
                     <div class="bg-gradient-to-r from-green-50 to-green-100 p-4 rounded-lg border border-green-200">
                         <p class="text-sm text-gray-600 mb-1">🎉 Pengumuman</p>
-                        <p class="font-bold text-green-600">15 Februari 2025</p>
+                        <p class="font-bold text-green-600">15 Agustus 2025</p>
                     </div>
                 </div>
             </div>
@@ -261,7 +265,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="p-4 bg-gray-50 rounded-lg">
                     <h4 class="font-semibold text-gray-800 mb-2">Kapan batas akhir pendaftaran?</h4>
-                    <p class="text-gray-600 text-sm">Pendaftaran ditutup pada 1 Februari 2025 pukul 23:59 WIB.</p>
+                    <p class="text-gray-600 text-sm">Pendaftaran ditutup pada 1 Agustus 2025 pukul 23:59 WIB.</p>
                 </div>
                 <div class="p-4 bg-gray-50 rounded-lg">
                     <h4 class="font-semibold text-gray-800 mb-2">Apakah ada biaya pendaftaran?</h4>
@@ -269,7 +273,7 @@
                 </div>
                 <div class="p-4 bg-gray-50 rounded-lg">
                     <h4 class="font-semibold text-gray-800 mb-2">Bagaimana cara mengecek hasil seleksi?</h4>
-                    <p class="text-gray-600 text-sm">Login ke akun Anda dan cek status di dashboard pada 15 Februari 2025.</p>
+                    <p class="text-gray-600 text-sm">Login ke akun Anda dan cek status di dashboard pada 15 Agustus 2025.</p>
                 </div>
                 <div class="p-4 bg-gray-50 rounded-lg">
                     <h4 class="font-semibold text-gray-800 mb-2">Dokumen apa saja yang wajib diunggah?</h4>

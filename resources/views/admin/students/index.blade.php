@@ -59,16 +59,23 @@
                                         </span>
                                     </td>
                                     <td>
-                                        <a href="{{ route('students.edit', $student->id) }}" class="btn btn-warning btn-sm me-1">
-                                            <i class="bi bi-pencil-square"></i> Edit
-                                        </a>
-                                        <form action="{{ route('students.destroy', $student->id) }}" method="POST" class="d-inline-block">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
-                                                <i class="bi bi-trash"></i> Hapus
-                                            </button>
-                                        </form>
+                                        <div class="d-flex justify-content-center gap-2">
+                                            <a href="{{ route('students.edit', $student->id) }}"
+                                            class="btn btn-sm btn-warning d-flex align-items-center justify-content-center"
+                                            title="Edit">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                            <form action="{{ route('students.destroy', $student->id) }}" method="POST"
+                                                onsubmit="return confirm('Yakin ingin menghapus siswa ini?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                        class="btn btn-sm btn-danger d-flex align-items-center justify-content-center"
+                                                        title="Hapus">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                             @empty
