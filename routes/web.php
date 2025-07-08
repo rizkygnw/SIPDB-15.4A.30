@@ -33,12 +33,15 @@ Route::middleware(['auth', 'userMiddleware'])->group(function(){
 
 // admin route
 Route::middleware(['auth', 'adminMiddleware'])->group(function(){
-    Route::get('/admin/dashboard',[AdminController::class,'index'])->name('admin.dashboard');
+    Route::get('/admin/dashboard',[AdminController::class,'index'])
+    ->name('admin.dashboard');
     Route::resource('/admin/students', StudentController::class);
     Route::resource('/admin/documents', DocumentController  ::class);
     Route::resource('/admin/departments', DepartmentController::class);
     Route::resource('/admin/payments', PaymentController::class);
     Route::resource('/admin/logs', LogController::class)->only(['index']);
-    Route::delete('/admin/logs/delete-all', [LogController::class, 'destroyAll'])->name('logs.destroy.all');
-    Route::get('/admin/export-siswa', [App\Http\Controllers\Admin\ExportController::class, 'export'])->name('siswa.export');
+    Route::delete('/admin/logs/delete-all', [LogController::class, 'destroyAll'])
+    ->name('logs.destroy.all');
+    Route::get('/admin/export-siswa', [App\Http\Controllers\Admin\ExportController::class, 'export'])
+    ->name('siswa.export');
 });
